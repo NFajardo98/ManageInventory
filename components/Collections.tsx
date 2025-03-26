@@ -11,17 +11,25 @@ const Collections = async () => {
       {!collections || collections.length === 0 ? (
         <p className="text-body-bold">No collections found</p>
       ) : (
-        <div className="flex flex-wrap items-center justify-center gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-20">
           {collections.map((collection: CollectionType) => (
-            <Link href={`/collections/${collection._id}`} key={collection._id}>
+            <Link
+              href={`/collections/${collection._id}`}
+              key={collection._id}
+              className="relative group w-[350px] h-[200px] transform transition-transform duration-300 hover:scale-105"
+            >
+              {/* Imagen */}
               <Image
-                key={collection._id}
                 src={collection.image}
                 alt={collection.title}
                 width={350}
                 height={200}
-                className="w-[350px] h-[200px] object-cover rounded-lg cursor-pointer"
-                />
+                className="w-full h-full object-cover rounded-lg"
+              />
+              {/* Capa blanca translúcida */}
+              <div className="absolute inset-0 bg-white bg-opacity-50 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <p className="text-heading2-bold text-black">{collection.title}</p>
+              </div>
             </Link>
           ))}
         </div>
