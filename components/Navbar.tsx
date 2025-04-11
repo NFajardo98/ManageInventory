@@ -30,11 +30,11 @@ const Navbar = () => {
           Home
         </Link>
         <Link
-          href={user ? "/wishlist" : "/sign-in"}
+          href={user ? "/favorites" : "/sign-in"}
           className={`hover:text-red-1 ${pathname === "/wishlist" && "text-red-1"
             }`}
         >
-          Wishlist
+          Favorites
         </Link>
         <Link
           href={user ? "/orders" : "/sign-in"}
@@ -95,11 +95,11 @@ const Navbar = () => {
             Home
           </Link>
           <Link
-            href={user ? "/wishlist" : "/sign-in"}
+            href={user ? "/favorites" : "/sign-in"}
             className="w-full text-left px-4 py-2 hover:text-red-1 transition-all duration-300 ease-in-out"
             onClick={() => setDropdownMenu(false)}
           >
-            Wishlist
+            Favorites
           </Link>
           <Link
             href={user ? "/orders" : "/sign-in"}

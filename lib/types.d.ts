@@ -10,20 +10,18 @@ type CollectionType = {
     title: string;
     description: string;
     media: [string];
-    category: string;
-    collections: [string];
-    tags: [string];
+    inventory: [InventoryColumnType];
+    collections: [CollectionType];
+    allergens: [string];
     price: number;
-    cost: number;
-    sizes: [string];
-    colors: [string];
-    createdAt: string;
-    updatedAt: string;
+    expense: number;
+    createdAt: Date;
+    updatedAt: Date;
   };
   
   type UserType = {
     clerkId: string;
-    wishlist: [string];
+    favorites: [string];
     createdAt: string;
     updatedAt: string;
   };
@@ -39,8 +37,7 @@ type CollectionType = {
   
   type OrderItemType = {
     product: ProductType;
-    color: string;
-    size: string;
-    quantity: number;
+    allergens: [string];
+    title: string;
     _id: string;
   }
