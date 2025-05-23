@@ -11,6 +11,7 @@ interface CartItem {
 
 interface CartStore {
   cartItems: CartItem[];
+  isCartAnimating: boolean; // Nuevo estado para la animación
   addItem: (item: CartItem) => void;
   removeItem: (idToRemove: string) => void;
   increaseQuantity: (idToIncrease: string) => void;
@@ -22,6 +23,7 @@ const useCart = create(
   persist<CartStore>(
     (set, get) => ({
       cartItems: [],
+      isCartAnimating: false, // Inicializamos el estado como falso
       addItem: (data: CartItem) => {
         const { item, quantity, title, allergens } = data;
         console.log("✅ Adding item to cart:", item);
@@ -37,15 +39,19 @@ const useCart = create(
 
         set({ cartItems: [...currentItems, { item, quantity, title, allergens }] });
         toast.success("Item added to cart", { icon: "🛒" });
+
+        // Activar la animación del carrito
+        set({ isCartAnimating: true });
+        setTimeout(() => set({ isCartAnimating: false }), 1000); // Desactivar después de 1 segundo
       },
-      removeItem: (idToRemove: String) => {
+      removeItem: (idToRemove: string) => {
         const newCartItems = get().cartItems.filter(
           (cartItem) => cartItem.item._id !== idToRemove
         );
         set({ cartItems: newCartItems });
         toast.success("Item removed from cart");
       },
-      increaseQuantity: (idToIncrease: String) => {
+      increaseQuantity: (idToIncrease: string) => {
         const newCartItems = get().cartItems.map((cartItem) =>
           cartItem.item._id === idToIncrease
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
@@ -54,7 +60,7 @@ const useCart = create(
         set({ cartItems: newCartItems });
         toast.success("Item quantity increased");
       },
-      decreaseQuantity: (idToDecrease: String) => {
+      decreaseQuantity: (idToDecrease: string) => {
         const newCartItems = get().cartItems.map((cartItem) =>
           cartItem.item._id === idToDecrease
             ? { ...cartItem, quantity: cartItem.quantity - 1 }
@@ -73,4 +79,3 @@ const useCart = create(
 );
 
 export default useCart;
-

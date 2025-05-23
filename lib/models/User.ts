@@ -6,6 +6,10 @@ const userSchema = new mongoose.Schema({
     type: Array,
     default: []
   },
+  orders: {
+    type: Array,
+    default: []
+  },
   createdAt: {
     type: Date,
     default: Date.now

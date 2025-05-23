@@ -7,61 +7,69 @@ import { MinusCircle, PlusCircle } from "lucide-react";
 import useCart from "@/lib/hooks/useCart";
 
 const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
-  const [selectedColor, setSelectedColor] = useState<string>(
-    productInfo.allergens[0]
-  );
-
   const [quantity, setQuantity] = useState<number>(1);
 
   const cart = useCart();
 
   return (
-    <div className="max-w-[400px] flex flex-col gap-4">
+    <div className="max-w-[400px] flex flex-col gap-6 p-6 bg-white shadow-lg rounded-lg">
+      {/* Título y Favorito */}
       <div className="flex justify-between items-center">
-        <p className="text-heading3-bold">{productInfo.title}</p>
+        <h1 className="text-2xl font-bold text-gray-800">{productInfo.title}</h1>
         <HeartFavorite product={productInfo} />
       </div>
 
-      <p className="text-heading3-bold">$ {productInfo.price}</p>
+      {/* Precio */}
+      <p className="text-xl font-semibold text-green-600">$ {productInfo.price.toFixed(2)}</p>
 
+      {/* Descripción */}
       <div className="flex flex-col gap-2">
-        <p className="text-lg font-semibold text-gray-700 border-b-2 border-gray-300 pb-1">Description:</p>
-        <p className="text-small-medium">{productInfo.description}</p>
+        <h2 className="text-lg font-semibold text-gray-700 border-b pb-1">
+          Description:
+        </h2>
+        <p className="text-gray-600 leading-relaxed">{productInfo.description}</p>
       </div>
 
+      {/* Alergias */}
       {productInfo.allergens.length > 0 && (
-          <div className="flex flex-col gap-2">
-            <p className="text-lg font-semibold text-gray-700 border-b-2 border-gray-300 pb-1">Allergens:</p>
-            <div className="flex gap-2">
-              {productInfo.allergens.map((allergen, index) => (
-                <p
-                  key={index}
-                  className="border border-black px-2 py-1 rounded-lg bg-black text-white"
-                >
-                  {allergen}
-                </p>
-              ))}
-            </div>
+        <div className="flex flex-col gap-2">
+          <h2 className="text-lg font-semibold text-gray-700 border-b pb-1">
+            Allergens:
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {productInfo.allergens.map((allergen, index) => (
+              <span
+                key={index}
+                className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-sm font-medium"
+              >
+                {allergen}
+              </span>
+            ))}
           </div>
+        </div>
       )}
 
+      {/* Cantidad */}
       <div className="flex flex-col gap-2">
-        <p className="text-lg font-semibold text-gray-700 border-b-2 border-gray-300 pb-1">Quantity:</p>
-        <div className="flex gap-4 items-center">
+        <h2 className="text-lg font-semibold text-gray-700 border-b pb-1">
+          Quantity:
+        </h2>
+        <div className="flex items-center gap-4">
           <MinusCircle
-            className="hover:text-red-1 cursor-pointer"
+            className="w-6 h-6 text-gray-600 hover:text-red-500 cursor-pointer"
             onClick={() => quantity > 1 && setQuantity(quantity - 1)}
           />
-          <p className="text-body-bold">{quantity}</p>
+          <p className="text-lg font-semibold text-gray-800">{quantity}</p>
           <PlusCircle
-            className="hover:text-red-1 cursor-pointer"
+            className="w-6 h-6 text-gray-600 hover:text-green-500 cursor-pointer"
             onClick={() => setQuantity(quantity + 1)}
           />
         </div>
       </div>
 
+      {/* Botón Agregar al Carrito */}
       <button
-        className="w-full bg-green-600 text-white text-lg font-semibold py-4 rounded-lg shadow-md hover:bg-green-700 hover:shadow-lg transition-all duration-300"
+        className="w-full bg-green-600 text-white text-lg font-semibold py-3 rounded-lg shadow-md hover:bg-green-700 hover:shadow-lg transition-all duration-300"
         onClick={() => {
           cart.addItem({
             item: productInfo,

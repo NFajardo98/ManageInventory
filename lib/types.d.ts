@@ -5,19 +5,22 @@ type CollectionType = {
     image: string;
   };
   
-  type ProductType = {
+type ProductType = {
     _id: string;
     title: string;
     description: string;
     media: [string];
-    inventory: [InventoryColumnType];
     collections: [CollectionType];
+    inventories: {
+      inventory: InventoryColumnType; // Referencia al inventario
+      quantity: number; // Cantidad asociada
+    }[];
     allergens: [string];
     price: number;
     expense: number;
     createdAt: Date;
     updatedAt: Date;
-  };
+  }
   
   type UserType = {
     clerkId: string;
@@ -27,17 +30,17 @@ type CollectionType = {
   };
   
   type OrderType = {
-    shippingAddress: Object;
     _id: string;
     customerClerkId: string;
-    products: [OrderItemType]
-    shippingRate: string;
-    totalAmount: number
+    products: [OrderItemType];
+    totalAmount: number;
+    table: number;
   }
   
   type OrderItemType = {
     product: ProductType;
     allergens: [string];
+    quantity: number;
     title: string;
     _id: string;
   }
