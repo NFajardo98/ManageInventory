@@ -6,7 +6,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
 // Obtener las órdenes de un usuario
-export const GET = async (req: NextRequest) => {
+export const GET = async () => {
   try {
     const user = await currentUser();
 
@@ -40,7 +40,7 @@ export const POST = async (req: NextRequest) => {
 
     await connectToDB();
 
-    const { products, totalAmount} = await req.json();
+    const { products, totalAmount, table} = await req.json();
     console.log("Received data:", { products, totalAmount }); // Depuración
 
     if (!products || !totalAmount ) {
@@ -51,7 +51,7 @@ export const POST = async (req: NextRequest) => {
       _id: new mongoose.Types.ObjectId().toString(),
       customerClerkId: user.id,
       products,
-      //quantity,
+      table,
       totalAmount,
     };
 

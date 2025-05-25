@@ -1,7 +1,7 @@
 "use client";
 
 import { UserButton, useUser } from "@clerk/nextjs";
-import { CircleUserRound, Menu, Search, ShoppingCart, ChevronDown } from "lucide-react";
+import { CircleUserRound, Menu, ShoppingCart, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -10,12 +10,12 @@ import  useCart from "@/lib/hooks/useCart"; // Importamos el hook del carrito
 
 const Navbar = () => {
   const pathname = usePathname();
-  const router = useRouter();
+  //const router = useRouter();
   const { user } = useUser();
-  const { cartItems, isCartAnimating } = useCart(); // Usamos el estado del carrito
+  const { cartItems, isCartAnimating } = useCart(); 
 
   const [dropdownMenu, setDropdownMenu] = useState(false);
-  const [query, setQuery] = useState("");
+  //const [query, setQuery] = useState("");
 
   return (
     <div className="sticky top-0 z-10 py-2 px-10 flex gap-2 justify-between items-center bg-white max-sm:px-2">

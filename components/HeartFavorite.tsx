@@ -15,16 +15,16 @@ const HeartFavorite = ({ product, updateSignedInUser }: HeartFavoriteProps) => {
   const router = useRouter();
   const { user } = useUser();
 
-  const [loading, setLoading] = useState(false);
+  //const [loading, setLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
 
   const getUser = async () => {
     try {
-      setLoading(true);
+      //setLoading(true);
       const res = await fetch("/api/users");
       const data = await res.json();
       setIsLiked(data.favorites.includes(product._id));
-      setLoading(false);
+      //setLoading(false);
     } catch (err) {
       console.log("[users_GET]", err);
     }

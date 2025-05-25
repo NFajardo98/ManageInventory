@@ -4,7 +4,7 @@ import { currentUser } from "@clerk/nextjs/server";
 
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (req: NextRequest) => {
+export const GET = async () => {
   try {
     const user = await currentUser();
 

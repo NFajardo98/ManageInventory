@@ -1,14 +1,21 @@
 import Gallery from "@/components/Gallery";
-import ProductCard from "@/components/ProductCard";
 import ProductInfo from "@/components/ProductInfo";
 import { getProductDetails, getRelatedProducts } from "@/lib/actions/actions";
 import Link from "next/link"; // Importamos Link de Next.js
+
+type RelatedProduct = {
+  _id: string;
+  title: string;
+  price: number;
+  media: string[];
+  collections: { title: string }[];
+};
 
 const ProductDetails = async ({ params }: { params: Promise<{ productId: string }> }) => {
   const { productId } = await params; // Usa `await` para desestructurar `params`
 
   const productDetails = await getProductDetails(productId);
-  const relatedProducts = await getRelatedProducts(productId);
+  const relatedProducts: RelatedProduct[] = await getRelatedProducts(productId);
 
   return (
     <>
@@ -24,7 +31,7 @@ const ProductDetails = async ({ params }: { params: Promise<{ productId: string 
             Also in {productDetails.collections[0]?.title}
           </h2>
           <div className="grid grid-cols-4 gap-6 max-md:grid-cols-2">
-            {relatedProducts.map((product: any) => (
+            {relatedProducts.map((product) => (
               <Link
                 key={product._id}
                 href={`/products/${product._id}`} // Enlace a la página del producto

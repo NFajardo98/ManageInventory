@@ -7,6 +7,17 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+type OrderData = {
+  products: {
+    product: string;
+    title: string;
+    allergens: string[];
+    quantity: number;
+  }[];
+  totalAmount: number;
+  table: number | "";
+};
+
 const Cart = () => {
   const router = useRouter();
   const { user } = useUser();
@@ -26,7 +37,7 @@ const Cart = () => {
     name: user?.fullName,
   };
 
-  const updateUserOrders = async (orderData: any) => {
+  const updateUserOrders = async (orderData: OrderData) => {
     try {
       const res = await fetch("/api/users/orders", {
         method: "POST",
