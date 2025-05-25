@@ -4,7 +4,7 @@ import { UserButton, useUser } from "@clerk/nextjs";
 import { CircleUserRound, Menu, ShoppingCart, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import  useCart from "@/lib/hooks/useCart"; // Importamos el hook del carrito
 

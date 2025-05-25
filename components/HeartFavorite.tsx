@@ -49,7 +49,9 @@ const HeartFavorite = ({ product, updateSignedInUser }: HeartFavoriteProps) => {
         });
         const updatedUser = await res.json();
         setIsLiked(updatedUser.favorites.includes(product._id));
-        updateSignedInUser && updateSignedInUser(updatedUser);
+        if (updateSignedInUser) {
+          updateSignedInUser(updatedUser);
+        }
       }
     } catch (err) {
       console.log("[favorites_POST]", err);

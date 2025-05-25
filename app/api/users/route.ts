@@ -2,7 +2,7 @@ import User from "@/lib/models/User";
 import { connectToDB } from "@/lib/mongoDB";
 import { currentUser } from "@clerk/nextjs/server";
 
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 export const GET = async () => {
   try {
